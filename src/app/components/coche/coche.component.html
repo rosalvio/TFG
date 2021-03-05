@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body">
+            <form #cocheForm=ngForm (ngSubmit)="nuevoCoche(cocheForm)">
+                <input type="hidden" name="_id" [(ngModel)]="cocheService.selectedCoche._id">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="matricula" placeholder="Matricula" [(ngModel)]="cocheService.selectedCoche.matricula">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="marca" placeholder="Marca" [(ngModel)]="cocheService.selectedCoche.marca">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="modelo" placeholder="Modelo" [(ngModel)]="cocheService.selectedCoche.modelo">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="kms" placeholder="Kms" [(ngModel)]="cocheService.selectedCoche.kms">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="cliente" placeholder="Cliente" [(ngModel)]="cocheService.selectedCoche.cliente">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="ultimaITV" placeholder="Ultima ITV" [(ngModel)]="cocheService.selectedCoche.ultimaITV">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="fechaMatriculacion" placeholder="Primera matriculacion" [(ngModel)]="cocheService.selectedCoche.fechaMatriculacion">
+                </div>
+                <button class="btn btn-danger mr-2" (click)='resetForm(cocheForm)'>Descartar</button>
+                <button class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table -table-stripped">
+            <thead>
+                <tr>
+                    <th>Matricula</th>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Kms</th>
+                    <th>Cliente</th>
+                    <th>Ultima ITV</th>
+                    <th>Fecha Matriculacion</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let coche of cocheService.coches">
+                    <td>{{coche.matricula}}</td>
+                    <td>{{coche.marca}}</td>
+                    <td>{{coche.modelo}}</td>
+                    <td>{{coche.kms}}</td>
+                    <td>{{coche.cliente}}</td>
+                    <td>{{coche.ultimaITV | date: 'd/M/yy'}}</td>
+                    <td>{{coche.fechaMatriculacion | date: 'd/M/yy'}}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" (click)='editCoche(coche)'><i class="material-icons">edit</i></button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteCoche(coche._id)"><i class="material-icons">delete</i></button>
+                    </td>
+                    <td *ngIf="caducaITV(coche)">
+                        <button class="btn btn-danger btn-sm"><i class="material-icons">announcement</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

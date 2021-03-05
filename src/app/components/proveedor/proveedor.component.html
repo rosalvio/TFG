@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body">
+            <form #proveedorForm=ngForm (ngSubmit)="nuevoProveedor(proveedorForm)">
+                <input type="hidden" name="_id" [(ngModel)]="proveedorService.selectedProveedor._id">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="proveedor" placeholder="Proveedor" [(ngModel)]="proveedorService.selectedProveedor.proveedor">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="factura" placeholder="Factura" [(ngModel)]="proveedorService.selectedProveedor.factura">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="fecha" placeholder="Fecha" [(ngModel)]="proveedorService.selectedProveedor.fecha">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="vencimiento" placeholder="Vencimiento" [(ngModel)]="proveedorService.selectedProveedor.vencimiento">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="base" placeholder="Base" [(ngModel)]="proveedorService.selectedProveedor.base">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="iva" placeholder="IVA" [(ngModel)]="proveedorService.selectedProveedor.iva">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" class="form-control" name="total" placeholder="Total" [(ngModel)]="proveedorService.selectedProveedor.total">
+                </div>
+                <button class="btn btn-danger mr-2" (click)='resetForm(proveedorForm)'>Descartar</button>
+                <button class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table -table-stripped">
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Factura</th>
+                    <th>Fecha</th>
+                    <th>Vencimiento</th>
+                    <th>Base</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proveedor of proveedorService.proveedores">
+                    <td>{{proveedor.proveedor}}</td>
+                    <td>{{proveedor.factura}}</td>
+                    <td>{{proveedor.fecha | date: 'd/M/yy'}}</td>
+                    <td>{{proveedor.vencimiento | date: 'd/M/yy'}}</td>
+                    <td>{{proveedor.base | number: '1.2-2'}}</td>
+                    <td>{{proveedor.iva | number: '1.2-2'}}</td>
+                    <td>{{proveedor.total | number: '1.2-2'}}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" (click)='editProveedor(proveedor)'><i class="material-icons">edit</i></button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteProveedor(proveedor._id)"><i class="material-icons">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

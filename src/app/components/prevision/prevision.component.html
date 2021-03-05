@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body">
+            <form #fechasForm=ngForm (ngSubmit)='filtrarVencimientos(fechasForm)'>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="inicio" placeholder="Desde" [(ngModel)]="inicio">
+                </div>
+                <div class="form-group">
+                    <input type="date" class="form-control" name="fin" placeholder="Hasta" [(ngModel)]="fin">
+                </div>
+                <button class="btn btn-danger mr-2" (click)='resetForm(fechasForm)'>Descartar</button>
+                <button class="btn btn-primary">Guardar</button>
+            </form>
+            <div class="container mt-2">
+                <h2>IVA en el rango de fechas: {{iva}}</h2>
+                <h2>Total en el rango de fechas: {{total}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table -table-stripped">
+            <thead>
+                <tr>
+                    <th>Proveedor</th>
+                    <th>Factura</th>
+                    <th>Fecha</th>
+                    <th>Vencimiento</th>
+                    <th>Base</th>
+                    <th>IVA</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let proveedor of proximas">
+                    <td>{{proveedor.proveedor}}</td>
+                    <td>{{proveedor.factura}}</td>
+                    <td>{{proveedor.fecha | date: 'd/M/yy'}}</td>
+                    <td>{{proveedor.vencimiento | date: 'd/M/yy'}}</td>
+                    <td>{{proveedor.base | number: '1.2-2'}}</td>
+                    <td>{{proveedor.iva | number: '1.2-2'}}</td>
+                    <td>{{proveedor.total | number: '1.2-2'}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

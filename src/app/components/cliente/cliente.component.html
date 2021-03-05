@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card-body">
+            <form #clienteForm=ngForm (ngSubmit)="nuevoCliente(clienteForm)">
+                <input type="hidden" name="_id" [(ngModel)]="clienteService.selectedCliente._id">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" [(ngModel)]="clienteService.selectedCliente.nombre">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="telefono" placeholder="Telefono" [(ngModel)]="clienteService.selectedCliente.telefono">
+                </div>
+                <button class="btn btn-danger mr-2" (click)='resetForm(clienteForm)'>Descartar</button>
+                <button class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table -table-stripped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Operaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clienteService.clientes">
+                    <td>{{cliente.nombre}}</td>
+                    <td>{{cliente.telefono}}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" (click)='editCliente(cliente)'><i class="material-icons">edit</i></button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteCliente(cliente._id)"><i class="material-icons">delete</i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
