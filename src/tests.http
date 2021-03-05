@@ -1,0 +1,39 @@
+@api = http://localhost:5000
+
+
+POST {{api}}/coches
+Content-Type: application/json
+
+{
+    "matricula": "V1234ABD",
+    "kms": 1234,
+    "cliente": "yo",
+    "modelo": "rx5",
+    "marca": "mazda"
+}
+
+###
+GET {{api}}/coches
+
+###
+GET {{api}}/coches/6011caf1ec5ba433a1bac5cb
+
+###
+PUT {{api}}/coches/6011caf1ec5ba433a1bac5cb
+Content-Type: application/json
+
+{
+    "cliente": "yo si"
+}
+
+###
+POST {{api}}/clientes
+Content-Type: application/json
+
+{
+    "nombre": "Yo",
+    "telefono": 123456789
+}
+
+###
+GET {{api}}/clientes
